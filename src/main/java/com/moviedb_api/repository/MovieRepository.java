@@ -1,0 +1,30 @@
+package com.moviedb_api.repository;
+
+
+import com.moviedb_api.models.Movie;
+import org.bson.types.ObjectId;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository("AutoRepository")
+
+public interface MovieRepository extends MongoRepository<Movie, ObjectId> {
+
+    Page<Movie> getMovieByTitleContainingIgnoreCase(String title, Pageable pageable);
+    Optional<Movie> getMovieById(ObjectId id);
+    Optional<Movie> getMovieByMovieId(String id);
+    Page<Movie> findMovieByGenresContains(String genre, Pageable pageable);
+
+    @Query(value = "{ 'cast.castId' : ?0 }")
+    Page<Movie> findMovieByCastId (String castId, Pageable pageable);
+
+    List<Movie> findMovieByTitleContainingIgnoreCase(String title);
+
+
+}
