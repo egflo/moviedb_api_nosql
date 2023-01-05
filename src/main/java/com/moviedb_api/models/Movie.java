@@ -47,12 +47,22 @@ public class Movie {
 
     String movieId;
 
+    Double popularity;
+
+    Long revenue;
+
+    List<Tag> keywords;
+
+    Bookmark bookmark;
 
 
     public Movie() {
     }
 
-public Movie(String movieId, String title, Integer year, String rated, String runtime, List<String> genres, String director, String writer, String boxOffice, String production, String plot, String language, String country, String awards, String poster, String background, List<Cast> cast, Rating ratings) {
+public Movie(String movieId, String title, Integer year, String rated, String runtime, List<String> genres,
+             String director, String writer, String boxOffice, String production, String plot,
+             String language, String country, String awards, String poster, String background,
+             List<Cast> cast, Rating ratings, Double popularity, Long revenue) {
         this.title = title;
         this.year = year;
         this.rated = rated;
@@ -71,6 +81,8 @@ public Movie(String movieId, String title, Integer year, String rated, String ru
         this.cast = cast;
         this.ratings = ratings;
         this.movieId = movieId;
+        this.popularity = popularity;
+        this.revenue = revenue;
     }
 
     public String getId() {
@@ -227,4 +239,35 @@ public Movie(String movieId, String title, Integer year, String rated, String ru
         this.movieId = id;
     }
 
+    public Double getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(Double popularity) {
+        this.popularity = popularity;
+    }
+
+    public Long getRevenue() {
+        return revenue;
+    }
+
+    public void setRevenue(Long revenue) {
+        this.revenue = revenue;
+    }
+
+    public List<Tag> getKeywords() {
+        return keywords;
+    }
+
+    public void setKeywords(List<Tag> keywords) {
+        this.keywords = keywords;
+    }
+
+   // public Bookmark getBookmark() {
+    //    return bookmark;
+   // }
+
+    //public void setBookmark(Bookmark bookmark) {
+    //    this.bookmark = bookmark;
+    //}
 }

@@ -1,5 +1,8 @@
 package com.moviedb_api.controller;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.moviedb_api.DTO.SentimentRequest;
 import com.moviedb_api.service.CastService;
 import com.moviedb_api.service.MovieService;
 import com.moviedb_api.service.ReviewService;
@@ -69,5 +72,23 @@ public class ReviewController {
                 Sort.by(sortBy.orElse("year"))
         )), HttpStatus.OK);
     }
+
+
+    @PostMapping("/rate")
+    public ResponseEntity<?> like(
+            @RequestHeader("Authorization") String token,
+            @RequestBody SentimentRequest request
+            ) {
+        System.out.println("token: " + token);
+        System.out.println("request: " + request);
+
+        DecodedJWT jwt = JWT.decode(token.split(" ")[1].trim());
+        String subject = jwt.getSubject();
+        request.setUserId(subject);
+        return new ResponseEntity<>(service.rateReview(request), HttpStatus.OK);
+    }
+
+
+
 
 }

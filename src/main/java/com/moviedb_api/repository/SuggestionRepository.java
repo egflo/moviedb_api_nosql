@@ -17,4 +17,6 @@ import java.util.Optional;
 public interface SuggestionRepository extends MongoRepository<Suggestion, ObjectId> {
 
     List<Suggestion> findSuggestionByMovieId(String movieId);
+
+    Page<Suggestion> findSuggestionByMovieId(String movieId, Pageable pageable);
 }

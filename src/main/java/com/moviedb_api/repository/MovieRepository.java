@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository("AutoRepository")
-
 public interface MovieRepository extends MongoRepository<Movie, ObjectId> {
+
 
     Page<Movie> getMovieByTitleContainingIgnoreCase(String title, Pageable pageable);
     Optional<Movie> getMovieById(ObjectId id);
@@ -25,6 +25,11 @@ public interface MovieRepository extends MongoRepository<Movie, ObjectId> {
     Page<Movie> findMovieByCastId (String castId, Pageable pageable);
 
     List<Movie> findMovieByTitleContainingIgnoreCase(String title);
+
+
+    //@Query(value = "{'keywords': {'$elemMatch': {'tag_id': ?0}}}")
+    @Query(value = "{'keywords.tag_id': ?0}")
+    Page<Movie> getMovieByKeywordsByTagId(Integer tag_id, Pageable pageable);
 
 
 }

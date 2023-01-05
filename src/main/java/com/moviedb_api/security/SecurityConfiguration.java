@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsUtils;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
@@ -41,10 +42,20 @@ public class SecurityConfiguration {
         http
                 .cors().and()
                 .authorizeHttpRequests(authorize -> authorize
+                                //.requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+                        .requestMatchers(HttpMethod.GET, "/movie/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/review/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/cast/**").permitAll()
+                        .requestMatchers( "/bookmark/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/review/**").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/review/**").authenticated()
+
+
                         .requestMatchers("/movie/**", "/auth").permitAll()
+                        //.anyRequest().authenticated()
                         //.requestMatchers("/admin/**").hasRole("ADMIN")
                         //.requestMatchers("/db/**").access(new WebExpressionAuthorizationManager("hasRole('ADMIN') and hasRole('DBA')"))
-                        .anyRequest().permitAll()
+                        //.anyRequest().permitAll()
                 );
 
 
