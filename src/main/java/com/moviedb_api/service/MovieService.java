@@ -68,7 +68,7 @@ public class MovieService {
             String movie_background = movie.getBackground();
 
             if (movie_background != null && movie_background.length() > 0) {
-                return 0;
+                //return 0;
             }
 
             // Create a neat value object to hold the URL
@@ -152,7 +152,7 @@ public class MovieService {
     }
 
     public Optional<Movie> findByMovieId(String id) {
-        background(id);
+        //background(id);
 
         return repository.getMovieByMovieId(id);
     }
